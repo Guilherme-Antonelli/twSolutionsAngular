@@ -13,10 +13,10 @@ import { UserTableDataSource, UserTableItem } from './user-table-datasource';
 import { UserTableService } from './user-table.service';
 
 export interface DialogData {
+  id: string;
   name: string;
   cpf: string;
   email: string;
-  password: string;
 }
 @Component({
   selector: 'app-user-table',

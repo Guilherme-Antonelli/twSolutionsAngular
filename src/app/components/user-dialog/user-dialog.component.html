@@ -19,6 +19,7 @@
   </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="data" (click)="createUser()" cdkFocusInitial>Criar</button>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button *ngIf="exist" mat-raised-button color="primary" [mat-dialog-close]="data" (click)="createUser()" cdkFocusInitial>Criar</button>
+    <button *ngIf="!exist" mat-raised-button color="primary" [mat-dialog-close]="data" (click)="updateUser()" cdkFocusInitial>Update</button>
+    <button *ngIf="!exist" mat-raised-button color="warn" (click)="deleteUser()">Delete</button>
 </div>

@@ -17,13 +17,15 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
+import { UserAlertDialogComponent } from './components/user-alert-dialog/user-alert-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
     UserTableComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    UserAlertDialogComponent
   ],
   imports: [
     BrowserModule,
