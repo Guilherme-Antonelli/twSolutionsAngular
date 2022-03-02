@@ -12,13 +12,13 @@
         <mat-label>email</mat-label>
         <input matInput type="text" name="email" formControlName="email">
       </mat-form-field>
-      <mat-form-field class="example-form-field" appearance="outline">
+      <mat-form-field *ngIf="exist" class="example-form-field" appearance="outline">
         <mat-label>senha</mat-label>
         <input matInput type="text" name="password" formControlName="password">
       </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="data.animal" (click)="createUser()" cdkFocusInitial>Criar</button>
+    <button mat-button [mat-dialog-close]="data" (click)="createUser()" cdkFocusInitial>Criar</button>
     <button mat-button (click)="onNoClick()">No Thanks</button>
 </div>

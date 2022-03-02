@@ -12,7 +12,6 @@ export class UserTableService {
   constructor(private readonly http: HttpClient) { }
 
   getUsers(skip: number, take: number, order: number, name?: string): Observable<UserInterface>{
-    console.log("name", name)
     const skipTake = {skip, take, order, name} 
     return this.http.post<UserInterface>(`${environment.url}users/pagination`, skipTake);
   }

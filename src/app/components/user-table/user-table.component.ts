@@ -6,13 +6,17 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { merge } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { UserInterface } from 'src/app/interfaces/user-interface';
+import { UserUpdateInterface } from 'src/app/interfaces/user-update-interface';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { UserTableDataSource, UserTableItem } from './user-table-datasource';
 import { UserTableService } from './user-table.service';
 
 export interface DialogData {
-  animal: string;
   name: string;
+  cpf: string;
+  email: string;
+  password: string;
 }
 @Component({
   selector: 'app-user-table',
@@ -41,11 +45,16 @@ export class UserTableComponent implements AfterViewInit, OnInit {
   async ngOnInit() {
     this.dataSource = new UserTableDataSource();    
   }
+
+  testeIndex(row: UserUpdateInterface){
+    this.openDialog(row);
+  }
   
-  openDialog(): void {
+  openDialog(data?: UserUpdateInterface): void {
+    if(!data) data = {id: '', name: '', cpf: '',email:''} 
     const dialogRef = this.dialog.open(UserDialogComponent, {
       width: '250px',
-      data: {},
+      data: data,
     });
     
     dialogRef.afterClosed().subscribe(result => {
@@ -59,7 +68,7 @@ export class UserTableComponent implements AfterViewInit, OnInit {
     // this.table.dataSource = this.dataSource;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.inputName.valueChanges.subscribe(t => this.attList())
+    this.inputName.valueChanges.subscribe(name => {if(name.length > 2 || name == '') this.attList()})
     this.sort.sortChange.subscribe(() => (this.dataSource.paginator.pageIndex = 0));
     this.sort.direction = 'asc';
     this.attList();
@@ -84,7 +93,6 @@ export class UserTableComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = false;
           this.isRateLimitReached = data === null;
           
-          console.log('0',this.inputName.value)
         if (data === null) {
           return [];
         }
